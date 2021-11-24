@@ -3,7 +3,7 @@
 CRUD
 
 ## Preview
-![App Screenshot](https://res.cloudinary.com/dcgrv6shk/image/upload/v1637740886/mediafiles/images/FMS_cb0bhb.png)
+![App Screenshot](https://res.cloudinary.com/dcgrv6shk/image/upload/v1637741061/mediafiles/images/FMS_cb0bhb.png)
 
 
 ## Run Locally
