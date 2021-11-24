@@ -1,0 +1,134 @@
+<script>
+    $(document).ready(function(){
+        //CreateData
+        $('#createfBtn').click(function(){
+            output = " ";
+            let foodname = $('#id_name').val()
+            let category =$('#id_category').val()
+            let price = $('#id_price').val()
+            let added_by = $('#id_added_by').val()
+            let csrfmiddlewaretoken = $("input[name='csrfmiddlewaretoken']").val()
+            if( foodname==" " || category ==" " || price ==" " ||added_by ==""){
+                     console.log("Fields cann't be empty")
+            }else{
+                fdata = {
+                    'name':foodname,
+                    'category':category,
+                    'price':price,
+                    'added_by':added_by,
+                    'csrfmiddlewaretoken':csrfmiddlewaretoken
+                },
+                console.log('Data:',fdata);
+                console.log("Sending Data...")
+                $.ajax({
+                    url: "{% url 'foodcreate' %}",
+                    method: "POST",
+                    data: fdata,
+                    dataType: 'json',
+                    success:function(response){
+                            $('.messages').text("Form Submitted Sucessfully");
+                            $('.messages').show()
+                            x = response.food_queryset
+                            console.log(x);
+                            for(i=0; i < x.length; i++){
+                               output +="<tr>"+
+                                "<td>"+x[i].name+"</td>"+
+                                "<td>"+x[i].price+"</td>"+
+                                "<td>"+x[i].added_on+"</td>"+
+                                "<td><input type='button' class='btn btn-info btn-sm' value='Update' data-foodkey =" + x[i].id + ">" +
+                                "<td><input type='button' class='btn btn-danger btn-sm' value='Delete' data-foodkey =" + x[i].id + ">" +
+                                "</tr>"
+                            }
+
+                            $('tbody').html(output)
+                            $('form')[0].reset();
+
+                    },
+                    error: function(error){
+                            console.log(error)
+                    }
+                })
+
+            }
+        })
+
+        
+
+        //DeleteData
+        $('tbody').on('click','#deletefBtn',function(){
+            output = " ";
+            let key =$(this).attr('data-foodkey')
+            let csrfmiddlewaretoken = $("input[name='csrfmiddlewaretoken']").val()
+                fdata = {
+                    'id':key,
+                    'csrfmiddlewaretoken':csrfmiddlewaretoken
+                },
+                console.log('Data:',fdata);
+                console.log("Sending Data...")
+                $.ajax({
+                    url: "{% url 'fooddelete' %}",
+                    method: "POST",
+                    data: fdata,
+                    dataType: 'json',
+                    success:function(response){
+                            $('.messages').text("Food Deleted Sucessfully");
+                            $('.messages').show()
+                            x = response.food_queryset
+                            console.log(x);
+                            for(i=0; i < x.length; i++){
+                               output +="<tr>"+
+                                "<td>"+x[i].name+"</td>"+
+                                "<td>"+x[i].price+"</td>"+
+                                "<td>"+x[i].added_on+"</td>"+
+                                "<td><input type='button' class='btn btn-info btn-sm' value='Update' data-users=" + x[i].id + ">" +
+                                "<td><input type='button' class='btn btn-danger btn-sm' value='Delete' data-users=" + x[i].id + ">" +
+                                "</tr>"
+                            }
+                            $('tbody').html(output)
+                            $('form')[0].reset();
+
+                    },
+                    error: function(error){
+                            console.log(error)
+                    }
+                })
+        })      
+
+
+
+        $('tbody').on('click','#deletefBtn',function(){
+            output = " ";
+            let key =$(this).attr('data-foodkey')
+            let csrfmiddlewaretoken = $("input[name='csrfmiddlewaretoken']").val()
+                fdata = {
+                    'id':key,
+                    'csrfmiddlewaretoken':csrfmiddlewaretoken
+                },
+                console.log('Data:',fdata);
+                console.log("Sending Data...")
+                $.ajax({
+                    url: "{% url 'foodupdate' %}",
+                    method: "POST",
+                    data: fdata,
+                    dataType: 'json',
+                    success:function(data){
+                            $('.messages').text("Update mode");
+                            $('.messages').show()
+
+                                $("#id_name").val(data.name);
+                                $("#id_price").val(data.price);//put the values in the add/student field box.
+                                $("#id_category").val(data.category);
+                                $("#id_added_by").val(data.added_by);
+
+                    },
+                    error: function(error){
+                            console.log(error)
+                    }
+                })
+        })
+        
+        
+        
+
+    })
+</script>

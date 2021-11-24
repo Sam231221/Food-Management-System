@@ -1,0 +1,71 @@
+$primary-color:rgb(0, 200, 255);
+$primary-hover-color:rgb(0,180,250);
+$secondary-color:rgb(99, 255, 2);
+$secondary-hover-color:rgb(99, 240,1);
+.nav{
+    height: 70vh;
+}
+.detailbar {
+  margin: .5rem;
+  padding: .5rem;
+  background-color: #f8f9fa;
+  .row{
+        .col{  background-color: white;
+                margin: .5rem;
+                box-shadow: 0 0 15px rgba(0, 0, 0 , 0.12);
+
+                padding: .5rem;
+                border-radius: 2rem;
+                padding: .7rem;
+
+                height: 100px;
+            hr{
+                margin: .3rem;
+            }
+            p{
+                padding: .3rem;
+
+            }
+        }
+   }
+}
+.detailbar{
+    .form-container{
+        background-color: white;
+        box-shadow: 0 0 14px rgba(0, 0, 0 , 0.10);
+        padding: .8rem;
+        margin: 1rem;
+    }
+
+    .table-responsive{
+        background-color: white;
+        box-shadow: 0 0 25px rgba(0, 0, 0 , 0.12);
+        padding: .8rem;
+        margin: 1rem;
+        border-radius: 2rem;
+    }
+}
+.btn-info{
+    color: white;
+    &:hover{
+        color: white;
+    }
+}
+.messages{
+    display: none;
+}
+.img-responsive{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img{
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+    }
+}
+.center-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

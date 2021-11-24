@@ -1,0 +1,178 @@
+<script>
+    $(document).ready(function () {
+
+        //CreateData
+        $('#createfBtn').click(function () {
+            output = " ";
+            let sid = $('#getid').val()
+            let foodname = $('#id_name').val()
+            let category = $('#id_category').val()
+            let price = $('#id_price').val()
+            let added_by = $('#id_added_by').val()
+            let added_on = $('#id_added_on').val()
+            let updated_on = $('#id_updated_on').val()
+            let csrfmiddlewaretoken = $(".foodform input[name='csrfmiddlewaretoken']").val()
+            if (foodname == " " || category == " " || price == " " || added_by == " " || updated_on == " " || added_on == " ") {
+                $('.messages').text("All Fields are mandatory!");
+                $('.messages').show()
+
+            } else if (category == " ") {
+                console.log("sdfs");
+            }
+            else {
+                fdata = {
+                    'sid': sid,
+                    'name': foodname,
+                    'category': category,
+                    'price': price,
+                    'added_by': added_by,
+                    'added_on': added_on,
+                    'updated_on': updated_on,
+                    'csrfmiddlewaretoken': csrfmiddlewaretoken
+                },
+                    console.log('Data:', fdata);
+                console.log("Sending Data...")
+                $.ajax({
+                    url: "{% url 'foodcreate' %}",
+                    method: "POST",
+                    data: fdata,
+                    dataType: 'json',
+                    success: function (response) {
+
+                        if (response.status == 'update') {
+                            htmlp = "<div style='background-color: rgba(107, 255, 1, 0.92);text-align: center; padding:1rem; color: white;' role='alert'><strong>Food Updated Sucessfully!</strong></div>"
+                            $('.messages').html(htmlp);
+                            $('.messages').show()
+                            x = response.food_queryset
+                            console.log(x);
+                            for (i = 0; i < x.length; i++) {
+                                output += "<tr>" +
+                                    "<td>" + x[i].name + "</td>" +
+                                    "<td>" + "Rs " + x[i].price + " /- " + "</td>" +
+                                    "<td>" + x[i].added_on + "</td>" +
+                                    "<td><input type='button'  id='updatefBtn' class='btn btn-info btn-sm' value='Update' data-foodkey =" + x[i].id + ">" +
+                                    "<td><input type='button'  id='deletefBtn' class='btn btn-danger btn-sm' value='Delete' data-foodkey =" + x[i].id + ">" +
+                                    "</tr>"
+                            }
+                            $('tbody').html(output)
+                            $("#getid").val('');
+                            $("form")[0].reset();
+                        }
+                        if (response.status == 'create') {
+                            htmlp = "<div style='background-color: rgba(107, 255, 1, 0.92);text-align: center; padding:1rem; color: white;' role='alert'><strong>Food Updated Sucessfully!</strong></div>"
+                            $('.messages').html(htmlp);
+                            $('.messages').show()
+                            x = response.food_queryset
+                            console.log(x);
+                            for (i = 0; i < x.length; i++) {
+                                output += "<tr>" +
+                                    "<td>" + x[i].name + "</td>" +
+                                    "<td>" + "Rs " + x[i].price + " /- " + "</td>" +
+                                    "<td>" + x[i].added_on + "</td>" +
+                                    "<td><input type='button' id='updatefBtn' class='btn btn-info btn-sm' value='Update' data-foodkey =" + x[i].id + ">" +
+                                    "<td><input type='button'  id='deletefBtn'  class='btn btn-danger btn-sm' value='Delete' data-foodkey =" + x[i].id + ">" +
+                                    "</tr>"
+                            }
+                            $('tbody').html(output)
+                            $("#getid").val('');
+                            $("form")[0].reset();
+                        }
+                        if (response.status == 'error') {
+                            htmlp = "<div style='background-color:rgba(255, 7, 7, 0.92);text-align: center; padding:1rem; color: white;' role='alert'><strong>All fields are mandatory !</strong></div>"
+                            $('.messages').html(htmlp);
+                            $('.messages').show()
+                        }
+                    },
+                    error: function (error) {
+                        console.log(error)
+                    }
+                })
+
+            }
+        })
+
+        //DeleteData
+        $('tbody').on('click', '#deletefBtn', function () {
+            output = " ";
+            let key = $(this).attr('data-foodkey')
+            let csrfmiddlewaretoken = $(".foodform input[name='csrfmiddlewaretoken']").val()
+            fdata = {
+                'id': key,
+                'csrfmiddlewaretoken': csrfmiddlewaretoken
+            },
+                console.log('Data:', fdata);
+            console.log("Sending Data...")
+            $.ajax({
+                url: "{% url 'fooddelete' %}",
+                method: "POST",
+                data: fdata,
+                dataType: 'json',
+                success: function (response) {
+                    if (response.action == 'delete') {
+                        htmlp = "<div style='background-color:rgba(255, 7, 7, 0.92);text-align: center; padding:1rem; color: white;' role='alert'><strong>Product deleted !</strong></div>"
+                        $('.messages').html(htmlp);
+                        $('.messages').show()
+                        x = response.food_queryset
+                        console.log(x);
+                        for (i = 0; i < x.length; i++) {
+                            output += "<tr>" +
+                                "<td>" + x[i].name + "</td>" +
+                                "<td>" + "Rs " + x[i].price + " /- " + "</td>" +
+                                "<td>" + x[i].added_on + "</td>" +
+                                "<td><input type='button' class='btn btn-info btn-sm' id='updatefBtn'  value='Update' data-foodkey=" + x[i].id + ">" +
+                                "<td><input type='button' class='btn btn-danger btn-sm' id='deletefBtn'  value='Delete' data-foodkey=" + x[i].id + ">" +
+                                "</tr>"
+                        }
+                        $('tbody').html(output)
+                        $("form")[0].reset();
+                    }
+
+                },
+                error: function (error) {
+                    console.log(error)
+                }
+            })
+        })
+
+
+        //UpdateData
+        $('tbody').on('click', '#updatefBtn', function () {
+            output = " ";
+            let key = $(this).attr('data-foodkey')
+            let csrfmiddlewaretoken = $(".foodform input[name='csrfmiddlewaretoken']").val()
+            fdata = {
+                'id': key,
+                'csrfmiddlewaretoken': csrfmiddlewaretoken
+            },
+                console.log('Data:', fdata);
+            console.log("Sending Data...")
+            $.ajax({
+                url: "{% url 'foodupdate' %}",
+                method: "POST",
+                data: fdata,
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data)
+                    $('.foodform h5 strong').text("Update Food");
+                    $('.messages').show()
+
+                    $('#createfBtn').text("Save");
+                    $('.messages').show()
+                    $("#getid").val(data.id);
+                    $("#id_name").val(data.name);
+                    $("#id_price").val(data.price);//put the values in the add/student field box.
+                    $("#id_category").val(data.category.rname);
+                    $("#id_added_by").val(data.added_by);
+                    $("#id_added_on").val(data.added_on);
+                    $("#id_updated_on").val(data.updated_on);
+
+                },
+                error: function (error) {
+                    console.log(error)
+                }
+            })
+        })
+
+
+    })
+</script>

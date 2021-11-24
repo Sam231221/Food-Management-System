@@ -1,0 +1,85 @@
+.nav {
+  height: 70vh;
+}
+
+.detailbar {
+  margin: .5rem;
+  padding: .5rem;
+  background-color: #f8f9fa;
+}
+
+.detailbar .row .col {
+  background-color: white;
+  margin: .5rem;
+  -webkit-box-shadow: 0 0 15px rgba(0, 0, 0, 0.12);
+          box-shadow: 0 0 15px rgba(0, 0, 0, 0.12);
+  padding: .5rem;
+  border-radius: 2rem;
+  padding: .7rem;
+  height: 100px;
+}
+
+.detailbar .row .col hr {
+  margin: .3rem;
+}
+
+.detailbar .row .col p {
+  padding: .3rem;
+}
+
+.detailbar .form-container {
+  background-color: white;
+  -webkit-box-shadow: 0 0 14px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0 14px rgba(0, 0, 0, 0.1);
+  padding: .8rem;
+  margin: 1rem;
+}
+
+.detailbar .table-responsive {
+  background-color: white;
+  -webkit-box-shadow: 0 0 25px rgba(0, 0, 0, 0.12);
+          box-shadow: 0 0 25px rgba(0, 0, 0, 0.12);
+  padding: .8rem;
+  margin: 1rem;
+  border-radius: 2rem;
+}
+
+.btn-info {
+  color: white;
+}
+
+.btn-info:hover {
+  color: white;
+}
+
+.img-responsive {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.img-responsive img {
+  width: 100px;
+  height: 100px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.center-div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+/*# sourceMappingURL=style.css.map */
