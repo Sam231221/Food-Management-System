@@ -20,6 +20,7 @@
                 console.log("sdfs");
             }
             else {
+                //create a fdata dictionary
                 fdata = {
                     'sid': sid,
                     'name': foodname,
@@ -31,6 +32,7 @@
                     'csrfmiddlewaretoken': csrfmiddlewaretoken
                 },
                     console.log('Data:', fdata);
+
                 console.log("Sending Data...")
                 $.ajax({
                     url: "{% url 'foodcreate' %}",

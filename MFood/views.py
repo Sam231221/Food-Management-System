@@ -22,6 +22,7 @@ def dashboard_view(request):
 def fooddetail_view(request):
     registrationform = UserRegistrationForm()
     food_queryset = Food.objects.all()
+    orderfood_queryset = OrderFood.objects.all()
     foodform = FoodForm()
     orderform =OrderForm
     context={
@@ -29,6 +30,7 @@ def fooddetail_view(request):
         'foodform': foodform,
         'orderform': orderform,
         'food_queryset':food_queryset,
+        'orderfood_queryset':orderfood_queryset,
         }
     return render(request, 'food.html', context)
 
@@ -69,14 +71,16 @@ def foodcreate_view(request):
             if get_id:
                  food_obj = Food(id=get_id,name=get_name, category= get_category, price = get_price, added_by=get_added_by, added_on=get_added_on, updated_on = get_updated_on  )
                  food_obj.save()
-                 print(food_obj)
-                 action="update"
+                 action = 'update'
+                 print("Updated ",food_obj)
+
                  food_queryset=list(Food.objects.values()) 
             else:
                  food_obj = Food(name=get_name, category= get_category, price = get_price, added_by=get_added_by, added_on=get_added_on, updated_on = get_updated_on  )
                  food_obj.save()
-                 print(food_obj)
-                 action = "create"
+                 action = 'create'
+                 print("Created ",food_obj)
+
                  food_queryset=list(Food.objects.values()) 
         else:
             messages.error(request, "All fields are mandatory!.")
@@ -143,49 +147,32 @@ def ordercreate_view(request):
     orderform =OrderForm
     if request.method == "POST" and request.is_ajax():
         orderform = OrderForm(request.POST)
-        if orderform.is_valid():       
-            print(orderform)
-            orderform.save()
-        print('\n')
-        ordervalues = OrderFood.objects.all()
-        print(ordervalues)
-        print('\n')
-        orderlist = list(ordervalues)
-        print(orderlist)
-        
-        return JsonResponse({
-            'status':1,
-            'order_queryset':orderlist })
-    else:
-        return JsonResponse({'status':0})
+        if orderform.is_valid():     
+            getfoodId=int(request.POST['order'])
+            order_obj = Food.objects.get(id=getfoodId)
+            
+            getuserId= request.POST['ordered_by']
+            ordered_by = User.objects.get(id=getuserId)
+            getstatus =request.POST['status']
+            
+            orderfood_obj=OrderFood(order=order_obj, ordered_by=ordered_by, status=getstatus)
+            orderfood_obj.save()
+            print('Orderfood_obj:',orderfood_obj)  
 
-
-def orderdelete_view(request):
-    registrationform = UserRegistrationForm()
-    if request.is_ajax() and request.method =="POST":
-        getid=request.POST.get('id')
-        print(getid)
-        order_obj=OrderFood.objects.filter(id=getid)
-        order_obj.delete()
+            ordervalues = OrderFood.objects.values()
+            print('\n')
+            orderlist = list(ordervalues)
+            for i in orderlist:
         
-        ordervalues = OrderFood.objects.values()
-        orderlist = list(ordervalues)
-        return JsonResponse({
+                  orderobj=Food.objects.get(id=i['order_id'])
+                  i['order_id'] =orderobj.name
+                  
+                  userobj=User.objects.get(id=i['ordered_by_id'])
+                  i['ordered_by_id'] =userobj.username
+
+            print(orderlist)
+            
+            return JsonResponse({
                 'status':1,
                 'order_queryset':orderlist })
-    else:
-        return JsonResponse({
-                'status':0,
-               })
 
-
-def orderupdate_view(request):
-    registrationform = UserRegistrationForm()
-    foodform = FoodForm()
-    orderform =OrderForm
-    context={
-        'registrationform':registrationform,
-        'foodform': foodform,
-        'orderform': orderform,
-        }
-    return render(request, 'foodupdate.html', context)

@@ -7,6 +7,8 @@ urlpatterns = [
      path('food/create', foodcreate_view, name="foodcreate"),
      path('food/delete', fooddelete_view, name="fooddelete"),
      path('food/update', foodupdate_view, name="foodupdate"),
-     
+
+     path('order/create', ordercreate_view, name="ordercreate"),
+
 
 ]

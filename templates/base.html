@@ -17,6 +17,7 @@
     <div class="container-fluid">
         <div class="row">
 
+            <!--SideBar-->
             <div class="col-2  sidebar">
                 <div class="d-flex flex-column flex-shrink-0 p-3">
                     <a href="/"
@@ -34,6 +35,13 @@
                             </a>
                         </li>
                         
+                        <li>
+                            <a href="{% url 'foods' %}" class="nav-link link-dark">
+                                <i class="bi bi-grid"></i>
+                                Orders
+                            </a>
+                        </li>
+
                     </ul>
 
                     <hr>
@@ -58,9 +66,11 @@
                 </div>
             </div>
 
-
+<!--Container list-->
             <div class="col detailbar">
+                
                 {% block body %}
+
                 <div class="row m-3 g-3">
                     <div class="small-box col">
                         <h5 class="text-center"><strong>Total Orders</strong></h5>
@@ -81,54 +91,8 @@
 
                 <hr style="margin-top: 3rem;">
 
-                <div class="row mt-5 detailbar-second">
 
-                    <div class="col-4">
-                        <form class="form-container order-container" autocomplete="on">
-                            <h3 class="text-center">Create Order</h3><br>
-                            {% csrf_token %}
-                            {% for field in orderform%}
-                            <label class="form-label">{{field.label}}</label>
-                            {{field}}
-                            <div class="invalid-feedback">
-                                {{field.errors}}
-                            </div>
-                            {% endfor %}
-
-                        </form>
-
-                        <button class="btn btn-primary mt-2 btn-sm" id="createoBtn">Create Order</button>
-                        <button class="btn btn-primary mt-2 btn-sm" id="oBtn">btn</button>
-                    </div>
-
-                    <div class="col-8">
-                        <div class="table-responsive">
-                            <table class="table table-sm">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Food</th>
-                                        <th scope="col">Ordered by</th>
-                                        <th scope="col">Ordered On</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for i in orderfood_queryset%}
-                                    <tr>
-                                        <td>{{i.order}}</td>
-                                        <td>{{i.ordered_by}}</td>
-                                        <td>{{i.ordered_on}}</td>
-                                        <td>{{i.status}}</td>
-                                        <td><input type='button' class='btn btn-info btn-sm'  id="updateoBtn" value='Update' data-orderkey ="{{i.id}}"></td>
-                                        <td><input type='button' class='btn btn-danger btn-sm'  id="deleteoBtn" value='Delete' data-orderkey ="{{i.id}}"></td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+                
                 {% endblock %}
             </div>
 
@@ -139,6 +103,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     {% include 'cruddata.html' %}
+    {% include 'ordercrud.html' %}
 {% block script %}
 
 {% endblock %}
