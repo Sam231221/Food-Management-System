@@ -1,10 +1,11 @@
 # Food Management System
+
 🛠 Type:
 CRUD
 
 ## Preview
-![App Screenshot](https://res.cloudinary.com/dcgrv6shk/image/upload/v1637741061/mediafiles/images/FMS_cb0bhb.png)
 
+![App Screenshot](https://res.cloudinary.com/dcgrv6shk/image/upload/v1637741061/mediafiles/images/FMS_cb0bhb.png)
 
 ## Run Locally
 
@@ -38,5 +39,7 @@ Start the server
   py manage.py runserver
 ```
 
+## Features
 
-
+Ajax Live Search
+Advanced Ajax CRUD

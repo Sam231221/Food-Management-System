@@ -1,31 +1,54 @@
 {% extends 'base.html' %}
 {% block body %}
 <div class="row">
+
+    <div class="col-12">
+        <div class="container   text-center search-container">
+            <h1>Search Engine</h1>
+
+            <form method="get" id="search-form">
+                {% csrf_token %}
+                <div class="form-field d-flex justify-content-center align-items-center">
+                    <input type="text" class="p-3 w-50 search-input form-control" placeholder="Search Foods..."
+                        id="search-input">
+
+                </div>
+            </form>
+
+            <div class="search-query invisible justify-content-center align-items-center" id="search-query">
+            </div>
+        </div>
+    </div>
+
+
+    <br><br>
+    <br><br>
     <div class="col-lg-4  col-md-12 mt- 5 ">
 
         <h5 class="text-center p-1 m-1"><strong class="messages "></strong></h5>
 
 
         <form class="form-container foodform" method="POST" autocomplete="on">
-            <h5 class="text-center"><strong>Create Food</strong></h5><hr>
+            <h5 class="text-center"><strong>Create Food</strong></h5>
+            <hr>
             <input type="hidden" name="getid" id="getid" />
             <input type="hidden" name="id_updated_on" id="id_updated_on" />
             <input type="hidden" name="id_added_on" id="id_added_on" />
             {% csrf_token %}
             {% for field in foodform%}
-                <label class="form-label">{{field.label}}</label>
-                {{field}}
-                <div class="invalid-feedback">
-                    {{field.errors}}
-                </div>
+            <label class="form-label">{{field.label}}</label>
+            {{field}}
+            <div class="invalid-feedback">
+                {{field.errors}}
+            </div>
             {% endfor %}
 
         </form>
-        <button  id="createfBtn" class="btn btn-primary ms-3 mt-2 btn-sm" >Create</button>
+        <button id="createfBtn" class="btn btn-primary ms-3 mt-2 btn-sm">Create</button>
     </div>
-    
+
     <div class="col-lg-7 col-md-12">
-        
+
         <div class="table-responsive">
             <h3 class="text-center"><strong>Food List</strong></h3><br>
             <table class="table table-sm">
@@ -44,10 +67,12 @@
                         <td>{{i.name}}</td>
                         <td>Rs {{i.price}} /-</td>
                         <td>{{i.added_on}}</td>
-                        <td><input type='button' class='btn btn-info btn-sm' value='Update'  id="updatefBtn" data-foodkey="{{i.id}}"></td>
-                        <td><input type='button' class='btn btn-danger btn-sm' value='Delete'  id="deletefBtn"  data-foodkey="{{i.id}}"></td>
+                        <td><input type='button' class='btn btn-info btn-sm' value='Update' id="updatefBtn"
+                                data-foodkey="{{i.id}}"></td>
+                        <td><input type='button' class='btn btn-danger btn-sm' value='Delete' id="deletefBtn"
+                                data-foodkey="{{i.id}}"></td>
                     </tr>
-                    {% endfor %}   
+                    {% endfor %}
 
                 </tbody>
             </table>
@@ -63,26 +88,27 @@
 
 
         <form class="order-container orderform" method="POST" autocomplete="on">
-            <h5 class="text-center"><strong>Create Order</strong></h5><hr>
+            <h5 class="text-center"><strong>Create Order</strong></h5>
+            <hr>
             <input type="hidden" name="getid" id="getid" />
             <input type="hidden" name="id_updated_on" id="id_updated_on" />
             <input type="hidden" name="id_added_on" id="id_added_on" />
             {% csrf_token %}
             {% for field in orderform%}
-                <label class="form-label">{{field.label}}</label>
-                {{field}}
-                <div class="invalid-feedback">
-                    {{field.errors}}
-                </div>
+            <label class="form-label">{{field.label}}</label>
+            {{field}}
+            <div class="invalid-feedback">
+                {{field.errors}}
+            </div>
             {% endfor %}
 
         </form>
-        <button  id="createoBtn" class="btn btn-primary ms-3 mt-2 btn-sm" >Create</button>
+        <button id="createoBtn" class="btn btn-primary ms-3 mt-2 btn-sm">Create</button>
     </div>
-    
+
     <!--OrderList-->
     <div class="col-lg-8 col-md-12 order-list">
-        
+
         <div class="table-responsive">
             <h3 class="text-center"><strong>Order List</strong></h3><br>
             <table class="table table-sm">
@@ -103,10 +129,12 @@
                         <td>{{i.ordered_by}}</td>
                         <td>{{i.ordered_on}}</td>
                         <td>{{i.status}}</td>
-                        <td><input type='button' class='btn btn-info btn-sm' value='Update'  id="updatefBtn" data-foodkey="{{i.id}}"></td>
-                        <td><input type='button' class='btn btn-danger btn-sm' value='Delete'  id="deletefBtn"  data-foodkey="{{i.id}}"></td>
+                        <td><input type='button' class='btn btn-info btn-sm' value='Update' id="updatefBtn"
+                                data-foodkey="{{i.id}}"></td>
+                        <td><input type='button' class='btn btn-danger btn-sm' value='Delete' id="deletefBtn"
+                                data-foodkey="{{i.id}}"></td>
                     </tr>
-                    {% endfor %}   
+                    {% endfor %}
 
                 </tbody>
             </table>

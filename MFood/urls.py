@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from .views import *
+from .views import foodcreate_view,fooddelete_view, fooddetail_view, ordercreate_view, search_engine, foodupdate_view
 urlpatterns = [
      path('', fooddetail_view, name="foods"),
      
@@ -9,6 +9,6 @@ urlpatterns = [
      path('food/update', foodupdate_view, name="foodupdate"),
 
      path('order/create', ordercreate_view, name="ordercreate"),
-
+    path('search_results', search_engine, name="search_engine")
 
 ]

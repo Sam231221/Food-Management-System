@@ -94,6 +94,32 @@ def foodcreate_view(request):
         return JsonResponse({'status':0})
 
 
+def search_engine(request):
+        response = None  #begin with this
+        keyword  =request.POST.get("keyword")
+        print(keyword)
+        queryset = Food.objects.filter(name__icontains = keyword)
+        print(queryset)
+        if len(queryset) > 0 and len(keyword) > 0:
+            customer_list = [] #inititae an empty list
+            
+            #Append all customer obj into the list using loop.
+            for obj in queryset:
+                item= {
+                    'pk': obj.id,
+                    'name': obj.name 
+                }
+                customer_list.append(item)
+            
+            #now attach customer_list  to the response
+            response = customer_list    
+        else:
+            response = "Sorry, We don't currently have "+str(keyword)    
+            print(response)
+        
+        return JsonResponse({'data':response})    
+    
+
 def fooddelete_view(request):
     registrationform = UserRegistrationForm()
     if request.is_ajax() and request.method =="POST":
