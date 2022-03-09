@@ -2,6 +2,10 @@
   height: 70vh;
 }
 
+.not-visible {
+  display: none;
+}
+
 .detailbar {
   margin: 0.5rem;
   padding: 0.5rem;
@@ -89,7 +93,7 @@
   margin: auto;
   margin-top: 0.3rem;
   max-height: 200px;
-  padding: 5px 5px;
+  padding: 22px 22px;
   background-color: rgb(255, 255, 255);
   box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.25);
   transition: 0.5s;

@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
     <title>Product Management System</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <!--defer is important for image preview-->
+    <script src="{% static 'js/photo.js' %}" defer></script>
+    <script src="{% static 'main.js' %}" defer></script>
 </head>
 
 <body>
@@ -29,16 +33,13 @@
                     <ul class="nav nav-pills flex-column mb-auto">
 
                         <li>
-                            <a href="{% url 'foods' %}" class="nav-link link-dark">
-                                <i class="bi bi-grid"></i>
-                                Foods
-                            </a>
+
                         </li>
 
                         <li>
-                            <a href="{% url 'foods' %}" class="nav-link link-dark">
+                            <a href="{% url 'photo-view' %}" class="nav-link link-dark">
                                 <i class="bi bi-grid"></i>
-                                Orders
+                                Photo Upload
                             </a>
                         </li>
 

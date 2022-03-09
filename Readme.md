@@ -40,6 +40,6 @@ Start the server
 ```
 
 ## Features
-
 Ajax Live Search
 Advanced Ajax CRUD
+Live Image preview after upload

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="mt-3">
+    <div id="alert-box"></div>
+    <div id="img-box"></div>
+
+    <form id="p-form" autocomplete="off">
+        <h5>Example 1</h5>
+        <p>This is a simple ajax image preview in file upload with ajax submit</p>
+        <hr>
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="btn btn-primary">Send</button>
+    </form>
+
+</div>
+{% endblock body %}

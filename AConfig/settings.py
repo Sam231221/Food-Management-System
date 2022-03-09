@@ -19,7 +19,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'MFood.apps.MfoodConfig',
-    
+    'MPhoto.apps.MphotoConfig',
     ]
 
 MIDDLEWARE = [

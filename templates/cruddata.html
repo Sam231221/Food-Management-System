@@ -56,12 +56,12 @@
                                     "<td><input type='button'  id='deletefBtn' class='btn btn-danger btn-sm' value='Delete' data-foodkey =" + x[i].id + ">" +
                                     "</tr>"
                             }
-                            $('tbody').html(output)
+                            $('.food-list tbody').html(output)
                             $("#getid").val('');
-                            $("form")[0].reset();
+                            $(".foodform")[0].reset();
                         }
                         if (response.status == 'create') {
-                            htmlp = "<div style='background-color: rgba(107, 255, 1, 0.92);text-align: center; padding:1rem; color: white;' role='alert'><strong>Food Updated Sucessfully!</strong></div>"
+                            htmlp = "<div style='background-color: rgba(107, 255, 1, 0.92);text-align: center; padding:1rem; color: white;' role='alert'><strong>Food Created Sucessfully!</strong></div>"
                             $('.messages').html(htmlp);
                             $('.messages').show()
                             x = response.food_queryset
@@ -75,9 +75,9 @@
                                     "<td><input type='button'  id='deletefBtn'  class='btn btn-danger btn-sm' value='Delete' data-foodkey =" + x[i].id + ">" +
                                     "</tr>"
                             }
-                            $('tbody').html(output)
+                            $('.food-list tbody').html(output)
                             $("#getid").val('');
-                            $("form")[0].reset();
+                            $(".foodform")[0].reset();
                         }
                         if (response.status == 'error') {
                             htmlp = "<div style='background-color:rgba(255, 7, 7, 0.92);text-align: center; padding:1rem; color: white;' role='alert'><strong>All fields are mandatory !</strong></div>"
@@ -125,7 +125,7 @@
                                 "<td><input type='button' class='btn btn-danger btn-sm' id='deletefBtn'  value='Delete' data-foodkey=" + x[i].id + ">" +
                                 "</tr>"
                         }
-                        $('tbody').html(output)
+                        $('.food-list tbody').html(output)
                         $("form")[0].reset();
                     }
 
