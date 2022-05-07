@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container">
+    <ol id="photo-list">
+
+    </ol>
+
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+$(document).ready(()=>{
+    setInterval(()=>{
+    $.ajax({
+        type:'GET',
+        url: "{% url 'photo-json-view' %}",
+        success: function(res){
+            console.log(res)
+            let photoElem = document.getElementById("photo-list")
+            let html=""
+            for (let i of res){
+              // html+="<li>"+i.name+"</li>"
+                html+= `<li>${i.name}</li>`
+            }
+            $('#photo-list').html(html)
+            
+        },
+        error: function(res){
+
+        }
+
+
+        })
+    }, 1000)
+
+
+})
+
+
+</script>
+
+{% endblock %}

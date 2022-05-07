@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="row">
+    
+    <div class="col-4 mt- 5 ">
+
+        <form class="form-container" action="#" autocomplete="on">
+            <h5 class="text-center"><strong>Create Food</strong></h5><br>
+            
+            {% for field in foodform%}
+                <label class="form-label">{{field.label}}</label>
+                {{field}}
+                <div class="invalid-feedback">
+                    {{field.errors}}
+                </div>
+            {% endfor %}
+    
+            <input type="submit" class="btn btn-primary mt-2 btn-sm" value="Create">
+    
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

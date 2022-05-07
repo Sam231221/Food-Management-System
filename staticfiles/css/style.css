@@ -1,0 +1,115 @@
+.nav {
+  height: 70vh;
+}
+
+
+.detailbar {
+  margin: 0.5rem;
+  padding: 0.5rem;
+  background-color: #f8f9fa;
+}
+
+.detailbar .row .col {
+  background-color: white;
+  margin: 0.5rem;
+  -webkit-box-shadow: 0 0 15px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.12);
+  padding: 0.5rem;
+  border-radius: 2rem;
+  padding: 0.7rem;
+  height: 100px;
+}
+
+.detailbar .row .col hr {
+  margin: 0.3rem;
+}
+
+.detailbar .row .col p {
+  padding: 0.3rem;
+}
+
+.detailbar .form-container {
+  background-color: white;
+  -webkit-box-shadow: 0 0 14px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 14px rgba(0, 0, 0, 0.1);
+  padding: 0.8rem;
+  margin: 1rem;
+}
+
+.detailbar .table-responsive {
+  background-color: white;
+  -webkit-box-shadow: 0 0 25px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.12);
+  padding: 0.8rem;
+  margin: 1rem;
+  border-radius: 2rem;
+}
+
+.btn-info {
+  color: white;
+}
+
+.btn-info:hover {
+  color: white;
+}
+
+.img-responsive {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.img-responsive img {
+  width: 100px;
+  height: 100px;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+.center-div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+/*# sourceMappingURL=style.css.map */
+
+#search-form{
+  position: relative;
+}
+/*the magic lies in position and visiblity*/
+.search-results {
+  position: absolute;
+  opacity: 0;
+  visibility: hidden;
+  width: 100%;
+  margin: auto;
+  margin-top: 0.3rem;
+  overflow: hidden;
+  max-height: 200px;
+  padding: 22px 22px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.25);
+  transition: 0.5s;
+}
+
+.visible {
+  display: block;
+  opacity: 1;
+  top: 61px;
+  visibility: visible;
+}
+.not-visible {
+  display: none;
+}

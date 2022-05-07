@@ -1,0 +1,53 @@
+<script>
+
+    //Function Prototype    
+    const sendSearchData = (keyword) => {
+        $.ajax({
+            type: "POST",
+            url: "{% url 'search_engine' %}",
+            data: {
+                'csrfmiddlewaretoken': csrf_token,  //const csrf_token ==...
+                'keyword': keyword,
+            },
+            success: function (response) {
+                console.log(response)
+                const data = response.data
+                console.log('value:', searchinput.value.length)
+                if (searchinput.value.length > 0) {
+                    searchquery.classList.remove("not-visible");
+                    searchquery.classList.add("visible");
+                    if (Array.isArray(data)) {
+
+                        searchquery.innerHTML = " "  //start with empty
+                        data.forEach(keyword => {
+                            searchquery.innerHTML +=
+                                `<div><b>${keyword.name}</b></div> `
+                        })
+                    } else {
+                        searchquery.innerHTML =
+                            `<div><b>${data}</b></div> `
+                    }
+                } else {
+                    searchquery.classList.remove("visible");
+                    searchquery.classList.add("not-visible");
+                }
+            },
+            error: function (error) {
+                console.log(error.data)
+            }
+        })
+    }
+
+
+    const searchform = document.getElementById("search-form")
+    const searchinput = document.getElementById("search-input")
+    const searchquery = document.getElementById("search-query")
+
+    const csrf_token = document.getElementsByName("csrfmiddlewaretoken")[0].value
+    console.log(csrf_token)
+    searchinput.addEventListener("keyup", e => {
+        console.log("printing", e.target.value)
+        sendSearchData(e.target.value);
+    })
+
+</script>
